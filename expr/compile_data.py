@@ -4,7 +4,7 @@ import json
 import tensorflow as tf
 import numpy as np
 
-import framework
+import framework.util.io
 
 
 '''func
