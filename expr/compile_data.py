@@ -43,6 +43,7 @@ def compile_data2tfrecord():
       num_ft = ft.shape[0]
       label = np.zeros((num_ft, num_label), dtype=np.float32)
       label[:, lid] = 1.
+      print lid
 
       example = tf.train.Example(features=tf.train.Features(feature={
         'fts': framework.util.io.bytes_feature([fts.tostring()]),
