@@ -30,6 +30,7 @@ def compile_data2tfrecord():
   num_label = len(label2lid)
 
   for data_file, out_file in zip(data_files, out_files):
+    print data_file, out_file
     with open(data_file) as f:
       data = json.load(f)
 
