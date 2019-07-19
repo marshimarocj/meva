@@ -19,6 +19,7 @@ def prepare_birnn():
   ]
   val_data_dir = os.path.join(root_dir, 'compile', 'val')
   expr_dir = os.path.join(root_dir, 'expr')
+  ft_name = 'of'
 
   params = {
     'dim_hiddens': [128],
