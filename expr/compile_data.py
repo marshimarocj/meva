@@ -48,10 +48,10 @@ def compile_data2tfrecord():
       print lid
 
       example = tf.train.Example(features=tf.train.Features(feature={
-        'fts': framework.util.io.bytes_feature([fts.tostring()]),
-        'fts.shape': framework.util.io.int64_feature(fts.shape),
-        'labels': framework.util.io.bytes_feature([labels.tostring()]),
-        'labels.shape': framework.util.io.int64_feature(labels.shape),
+        'fts': framework.util.io.bytes_feature([ft.tostring()]),
+        'fts.shape': framework.util.io.int64_feature(ft.shape),
+        'labels': framework.util.io.bytes_feature([label.tostring()]),
+        'labels.shape': framework.util.io.int64_feature(label.shape),
       }))
       records.append(example)
 
