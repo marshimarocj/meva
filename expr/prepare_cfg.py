@@ -24,7 +24,7 @@ def prepare_birnn():
     'dim_hiddens': [128],
     'dim_embed': 128,
     'num_step': 128,
-    'num_pos_class': 19,
+    'num_pos_class': 35,
     'dim_ft': 1024,
     'shift': 64/2,
     'focal_loss': True,
@@ -46,7 +46,7 @@ def prepare_birnn():
     'trn_dirs': trn_data_dirs,
     'val_dir': val_data_dir,
     'output_dir': outprefix,
-    'label2lid_file': os.path.join(root_dir, 'lst', 'label2lid_%d.json'%params['num_pos_class'])
+    'label2lid_file': os.path.join(root_dir, 'meva_train', 'label.json')
   }
   path_cfg_file = '%s.path.json'%outprefix
   with open(path_cfg_file, 'w') as fout:
