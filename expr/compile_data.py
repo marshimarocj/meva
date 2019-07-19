@@ -29,8 +29,6 @@ def compile_data2tfrecord():
     label2lid = json.load(f)
   num_label = len(label2lid)
 
-  print data_files
-  print out_files
   for data_file, out_file in zip(data_files, out_files):
     with open(data_file) as f:
       data = json.load(f)
@@ -64,5 +62,5 @@ def compile_data2tfrecord():
         writer.write(record.SerializeToString())
 
 
-if __name__ == '__main___':
+if __name__ == '__main__':
   compile_data2tfrecord()
