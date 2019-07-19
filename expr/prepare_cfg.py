@@ -33,10 +33,9 @@ def prepare_birnn():
     'cell_dim_hidden': 128,
   }
 
-  outprefix = '%s/%s.%s.%d.%s.%d'%(
+  outprefix = '%s/%s.%s.%d.%d'%(
     expr_dir, ft_name, '_'.join([str(d) for d in params['dim_hiddens']]), 
-    params['focal_loss'], '-'.join(props_types), 
-    params['num_step']
+    params['focal_loss'], params['num_step']
   )
   model_cfg_file = '%s.model.json'%outprefix
   cfg = model.birnn.gen_cfg(**params)
