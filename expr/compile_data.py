@@ -17,14 +17,18 @@ def compile_data2tfrecord():
   root_dir = '/home/chenj/data'
   label_file = os.path.join(root_dir, 'meva_train', 'label.json')
   data_files = [
-    os.path.join(root_dir, 'meva_train', 'feature_trn_teamA.json'),
-    os.path.join(root_dir, 'meva_train', 'feature_trn_teamB.json'),
-    os.path.join(root_dir, 'meva_train', 'feature_trn_teamC.json'),
+    # os.path.join(root_dir, 'meva_train', 'feature_trn_teamA.json'),
+    # os.path.join(root_dir, 'meva_train', 'feature_trn_teamB.json'),
+    # os.path.join(root_dir, 'meva_train', 'feature_trn_teamC.json'),
+    os.path.join(root_dir, 'meva_train', 'feature_f330_train.json'),
+    os.path.join(root_dir, 'meva_train', 'feature_f330_valid.json'),
   ]
   out_files = [
-    os.path.join(root_dir, 'compile', 'all', 'teamA.tfrecord'),
-    os.path.join(root_dir, 'compile', 'all', 'teamB.tfrecord'),
-    os.path.join(root_dir, 'compile', 'all', 'teamC.tfrecord'),
+    # os.path.join(root_dir, 'compile', 'all', 'teamA.tfrecord'),
+    # os.path.join(root_dir, 'compile', 'all', 'teamB.tfrecord'),
+    # os.path.join(root_dir, 'compile', 'all', 'teamC.tfrecord'),
+    os.path.join(root_dir, 'compile', 'trn', '0.tfrecord'),
+    os.path.join(root_dir, 'compile', 'val', '0.tfrecord'),
   ]
 
   with open(label_file) as f:
