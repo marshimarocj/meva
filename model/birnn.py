@@ -439,7 +439,7 @@ class Reader(framework.model.data.Reader):
 class ValReader(framework.model.data.Reader):
   def __init__(self, label2lid_file, data_dirs, num_step):
     self.label2lid = {}
-    self.shuffle = shuffle
+    self.shuffle = False
     self.num_step = num_step
 
     self.fts = []
