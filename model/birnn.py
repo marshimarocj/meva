@@ -484,7 +484,6 @@ class ValReader(framework.model.data.Reader):
       ft = self.fts[idx]
       label = self.labels[idx]
       label_mask = self.masks[idx]
-      props_name = self.props_names[idx]
       num = ft.shape[0]
       if self.shuffle:
         i = random.randint(0, min(max(num-1, 0), self.num_step/2))
