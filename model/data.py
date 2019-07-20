@@ -20,7 +20,7 @@ def parse_record(record, mean):
   label = np.fromstring(label, dtype=np.float32)
   label = label.reshape(shape)
 
-  label_mask = np.ones(label.shape[:1], dtype=np.float32)
+  label_mask = np.ones(label.shape, dtype=np.float32)
 
   return ft, label, label_mask
 
