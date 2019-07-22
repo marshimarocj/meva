@@ -138,7 +138,7 @@ def compile_neg_data():
     print video
     pos_eids = video2pos_eids[video]
 
-    ft_dir = os.path.join(ft_root_dir, video)
+    ft_dir = os.path.join(ft_root_dir, video + '.avi')
     names = os.listdir(ft_dir)
     records = []
     for name in names:
