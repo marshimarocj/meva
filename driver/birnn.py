@@ -55,7 +55,7 @@ if __name__ == '__main__':
     trn_reader = model.birnn.Reader(
       path_cfg.label2lid_file, path_cfg.trn_dirs, model_cfg.subcfgs[ENC].num_step, model_cfg.shift, shuffle=True)
     val_reader = model.birnn.ValReader(
-      path_cfg.label2lid_file, [path_cfg.val_dir], model_cfg.subcfgs[ENC].num_step, model_cfg.shift)
+      path_cfg.label2lid_file, [path_cfg.val_dir], model_cfg.subcfgs[ENC].num_step)
     if path_cfg.model_file != '':
       trntst.train(trn_reader, val_reader, memory_fraction=opts.memory_fraction, resume=True)
     else:

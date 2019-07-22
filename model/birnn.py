@@ -397,7 +397,6 @@ class Reader(framework.model.data.Reader):
       ft = self.fts[idx]
       label = self.labels[idx]
       label_mask = self.masks[idx]
-      props_name = self.props_names[idx]
       num = ft.shape[0]
       i = 0
       while i < num:
@@ -439,7 +438,7 @@ class Reader(framework.model.data.Reader):
 class ValReader(framework.model.data.Reader):
   def __init__(self, label2lid_file, data_dirs, num_step):
     self.label2lid = {}
-    self.shuffle = shuffle
+    self.shuffle = False
     self.num_step = num_step
 
     self.fts = []
@@ -484,7 +483,6 @@ class ValReader(framework.model.data.Reader):
       ft = self.fts[idx]
       label = self.labels[idx]
       label_mask = self.masks[idx]
-      props_name = self.props_names[idx]
       num = ft.shape[0]
       if self.shuffle:
         i = random.randint(0, min(max(num-1, 0), self.num_step/2))
