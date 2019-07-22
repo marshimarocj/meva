@@ -49,7 +49,8 @@ def gen_script_and_run(python_file, model_cfg_file, path_cfg_file, best_epoch, g
 '''expr
 '''
 def predict():
-  root_dir = '/home/chenj/data'
+  # root_dir = '/home/chenj/data' # light-1
+  root_dir = '/home/jiac/ssd/meva' # gpu9
 
   expr_name = os.path.join(root_dir, 'expr/of.128.1.128')
   python_file = 'birnn.py'
@@ -57,7 +58,7 @@ def predict():
   gpuid = 0
   tst_dirs = [
     os.path.join(root_dir, 'compile', 'val'),
-    os.path.join(root_dir, 'compile', 'val_neg'),
+    # os.path.join(root_dir, 'compile', 'val_neg'),
   ]
   out_name = 'val'
 
@@ -111,5 +112,5 @@ def threshold():
 
 
 if __name__ == '__main__':
-  # predict()
-  threshold()
+  predict()
+  # threshold()
