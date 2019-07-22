@@ -58,7 +58,7 @@ def predict():
   gpuid = 1
   tst_dirs = [
     os.path.join(root_dir, 'compile', 'val'),
-    # os.path.join(root_dir, 'compile', 'val_neg'),
+    os.path.join(root_dir, 'compile', 'val_neg'),
   ]
   out_name = 'val'
 
