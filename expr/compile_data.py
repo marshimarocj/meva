@@ -150,7 +150,7 @@ def compile_neg_data():
         continue
 
       ft_file = os.path.join(ft_dir, name)
-      ft = norm_ft(ft_file)
+      ft = load_ft(ft_file)
       ft = np.mean(np.mean(ft, 2), 1)
       ft = ft.astype(np.float32)
       num_ft = ft.shape[0]
