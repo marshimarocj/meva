@@ -13,7 +13,8 @@ import model.birnn
 '''expr
 '''
 def prepare_birnn():
-  root_dir = '/home/chenj/data' # light-1
+  # root_dir = '/home/chenj/data' # light-1
+  root_dir = '/home/chenj/data' # gpu9
   trn_data_dirs = [
     os.path.join(root_dir, 'compile', 'trn')
   ]
