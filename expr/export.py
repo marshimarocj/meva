@@ -6,6 +6,7 @@ sys.path.append('../')
 import tensorflow as tf
 
 import model.birnn
+import driver.common
 
 
 '''func
