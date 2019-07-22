@@ -71,7 +71,7 @@ def compile_data2tfrecord():
 def gen_pos_lst():
   root_dir = '/home/chenj/data'
   lst_file = os.path.join(root_dir, 'meva_train', 'gt_proposals', 'valid.lst')
-  out_file = os.path.join(root_dir, 'meta_train', 'gt_proposals', 'video2pos_eids.json')
+  out_file = os.path.join(root_dir, 'meva_train', 'gt_proposals', 'video2pos_eids.json')
 
   videos = []
   with open(lst_file) as f:
