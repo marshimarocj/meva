@@ -64,5 +64,39 @@ def compile_data2tfrecord():
         writer.write(record.SerializeToString())
 
 
+def gen_pos_lst():
+  root_dir = '/home/chenj/data'
+  lst_file = os.path.join(root_dir, 'meva_train', 'gt_proposals', 'valid.lst')
+  out_file = os.path.join(root_dir, 'meta_train', 'gt_proposals', 'video2pos_eids.json')
+
+  videos = []
+  with open(lst_file) as f:
+    for line in f:
+      line = line.strip()
+      name, _ = os.path.splitext(line)
+      videos.append(name)
+
+  video2pos_eids = {}
+  for video in videos:
+    video2pos_eids[video] = []
+
+    teams = ['teamA', 'teamB', 'teamC']
+    for team in teams:
+      pos_lst_file = os.path.join(root_dir, 'meva_train', 'gt_proposals', team, video + '.json')
+      with open(pos_lst_file) as f:
+        data = json.load(f)
+      for eid in data:
+        video2pos_eids[video].append(eid)
+    with open(out_file, 'w') as fout:
+      json.dump(video2pos_eids, fout, indent=2)
+
+
+def compile_neg_data():
+  root_dir = '/home/chenj/data'
+  lst_file = os.path.join(root_dir, 'meva_train', 'gt_proposals', 'valid.lst')
+
+
+
 if __name__ == '__main__':
-  compile_data2tfrecord()
+  # compile_data2tfrecord()
+  gen_pos_lst()
