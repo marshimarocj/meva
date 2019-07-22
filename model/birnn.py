@@ -330,7 +330,7 @@ class TrnTst(framework.model.trntst.TrnTst):
     all_predicts = np.array(all_predicts)
     all_labels = np.array(all_labels)
 
-    np.savez_compressed(predict_file, predicts=all_predicts, labels=all_labels, props=all_props)
+    np.savez_compressed(predict_file, predicts=all_predicts, labels=all_labels)
 
 
 class PathCfg(framework.model.trntst.PathCfg):
