@@ -154,7 +154,7 @@ def compile_neg_data():
       ft = np.mean(np.mean(ft, 2), 1)
       ft = ft.astype(np.float32)
       num_ft = ft.shape[0]
-      label = np.zeros((num_ft, num_label))
+      label = np.zeros((num_ft, num_label), dtype=np.float32)
 
       example = tf.train.Example(features=tf.train.Features(feature={
         'fts': framework.util.io.bytes_feature([ft.tostring()]),
@@ -163,7 +163,7 @@ def compile_neg_data():
         'labels.shape': framework.util.io.int64_feature(label.shape),
       }))
       records.append(example)
-      print eid, fts.shape
+      print eid, ft.shape
 
     options = tf.python_io.TFRecordOptions(tf.python_io.TFRecordCompressionType.GZIP)
 
