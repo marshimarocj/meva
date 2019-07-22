@@ -61,7 +61,7 @@ def predict():
   path_cfg_file = '%s.path.json'%expr_name
   log_dir = os.path.join(expr_name, 'log')
 
-  best_epoch = select_best_epoch(log_dir, metric=metric)
+  best_epoch = select_best_epoch(log_dir)
   print best_epoch
   p = gen_script_and_run(python_file, model_cfg_file, path_cfg_file, best_epoch, gpuid,
     out_name=out_name, data_dirs=','.join(tst_dirs))
