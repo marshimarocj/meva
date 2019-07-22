@@ -80,6 +80,11 @@ def threshold():
   expr_name = os.path.join(root_dir, 'expr/of.128.1.128')
   out_file = os.path.join(expr_name, 'pred', 'threshold.%.2f.json'%rfa)
 
+  pred_file = os.path.join(expr_name, 'pred', 'val.npz')
+  data = np.load(pred_file)
+  predicts = data['predicts']
+  labels = data['labels']
+
   num_label = predicts.shape[-1]
   out = []
   for l in range(num_label):
