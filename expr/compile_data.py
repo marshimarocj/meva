@@ -87,6 +87,8 @@ def gen_pos_lst():
     teams = ['teamA', 'teamB', 'teamC']
     for team in teams:
       pos_lst_file = os.path.join(root_dir, 'meva_train', 'gt_proposals', team, video + '.json')
+      if not os.path.exists(pos_lst_file):
+        continue
       with open(pos_lst_file) as f:
         data = json.load(f)
       for eid in data:
