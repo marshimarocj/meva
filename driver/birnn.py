@@ -60,3 +60,13 @@ if __name__ == '__main__':
       trntst.train(trn_reader, val_reader, memory_fraction=opts.memory_fraction, resume=True)
     else:
       trntst.train(trn_reader, val_reader, memory_fraction=opts.memory_fraction)
+  else:
+    path_cfg.model_file = os.path.join(path_cfg.model_dir, 'epoch-%d'%opts.best_epoch)
+    path_cfg.log_file = None
+    path_cfg.predict_file = os.path.join(path_cfg.output_dir, 'pred', '%s.npz'%opts.out_name)
+    data_dirs = [path_cfg.val_dir] if opts.data_dirs == '' else opts.data_dirs.split(',')
+
+    trntst = model.birnn.TrnTst(model_cfg, path_cfg, m)
+    tst_reader = model.birnn.ValReader(
+      path_cfg.label2lid_file, data_dirs, model_cfg.subcfgs[ENC].num_step)
+    trntst.test(tst_reader, memory_fraction=opts.memory_fraction)
