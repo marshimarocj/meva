@@ -69,5 +69,39 @@ def predict():
   p.wait()
 
 
+def threshold():
+  root_dir = '/home/chenj/data'
+
+  rfa = 1.
+  FT_STRIDE = 8
+  FPS = 30
+  target_fpr = rfa / 60 / FPS * FT_STRIDE
+
+  expr_name = os.path.join(root_dir, 'expr/of.128.1.128')
+  out_file = os.path.join(expr_name, 'pred', 'threshold.%.2f.json'%rfa)
+
+  num_label = predicts.shape[-1]
+  out = []
+  for l in range(num_label):
+    predict = predicts[:, l]
+    label = labels[:, l]
+    fprs, tprs, thresholds = roc_curve(label, predict)
+    i = 0
+    for fpr, tpr, threshold in zip(fprs, tprs, thresholds):
+      i += 1
+      if fpr >= target_fpr:
+        break
+    tpr = np.mean(tprs[:i])
+    out.append({
+      'fpr': float(fpr),
+      'tpr': float(tpr),
+      'threshold': float(threshold),
+    })
+
+  with open(out_file, 'w') as fout:
+    json.dump(out, fout, indent=2)
+
+
 if __name__ == '__main__':
-  predict()
+  # predict()
+  threshold()

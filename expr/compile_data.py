@@ -3,6 +3,7 @@ import json
 
 import tensorflow as tf
 import numpy as np
+from sklearn.metrics import roc_curve
 
 import framework.util.io
 
