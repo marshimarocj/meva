@@ -163,6 +163,7 @@ def compile_neg_data():
         'labels.shape': framework.util.io.int64_feature(label.shape),
       }))
       records.append(example)
+      print eid, fts.shape
 
     options = tf.python_io.TFRecordOptions(tf.python_io.TFRecordCompressionType.GZIP)
 
