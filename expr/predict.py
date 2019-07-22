@@ -47,7 +47,7 @@ def gen_script_and_run(python_file, model_cfg_file, path_cfg_file, best_epoch, g
 def predict():
   root_dir = '/home/chenj/data'
 
-  expr_name = 'expr/of.128.1.128'
+  expr_name = os.path.join(root_dir, 'expr/of.128.1.128')
   python_file = 'birnn.py'
 
   gpuid = 0
