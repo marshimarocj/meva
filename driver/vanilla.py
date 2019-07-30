@@ -51,7 +51,7 @@ if __name__ == '__main__':
     trntst = model.vanilla.TrnTst(model_cfg, path_cfg, m)
 
     trn_reader = model.vanilla.Reader(
-      path_cfg.label2lid_file, path_cfg.trn_dirs, model_cfg.num_step, model_cfg.shift, shuffle=True)
+      path_cfg.label2lid_file, path_cfg.trn_dirs, model_cfg.num_step, model_cfg.num_step, shuffle=True)
     val_reader = model.vanilla.ValReader(
       path_cfg.label2lid_file, [path_cfg.val_dir], model_cfg.num_step)
     if path_cfg.model_file != '':
