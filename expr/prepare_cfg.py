@@ -60,7 +60,7 @@ def prepare_birnn():
 
 def prepare_vanilla():
   root_dir = '/home/chenj/data' # light-1
-  rn_data_dirs = [
+  trn_data_dirs = [
     os.path.join(root_dir, 'compile', 'trn')
   ]
   val_data_dir = os.path.join(root_dir, 'compile', 'val')
