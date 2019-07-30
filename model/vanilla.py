@@ -180,7 +180,30 @@ class Model(framework.model.module.AbstractModel):
     }
 
 
-TrnTst = birnn.TrnTst
+class TrnTst(birnn.TrnTst):
+  def _construct_feed_dict_in_trn(self, data):
+    return {
+      self.model.inputs[self.model.InKey.FT]: data['fts'],
+      self.model.inputs[self.model.InKey.IS_TRN]: True,
+      self.model.inputs[self.model.InKey.LABEL]: data['labels'],
+      self.model.inputs[self.model.InKey.LABEL_MASK]: data['label_masks'],
+    }
+
+  def _construct_feed_dict_in_val(self, data):
+    return {
+      self.model.inputs[self.model.InKey.FT]: data['fts'],
+      self.model.inputs[self.model.InKey.IS_TRN]: False,
+      self.model.inputs[self.model.InKey.LABEL]: data['labels'],
+      self.model.inputs[self.model.InKey.LABEL_MASK]: data['label_masks'],
+    }
+
+  def _construct_feed_dict_in_tst(self, data):
+    return {
+      self.model.inputs[self.model.InKey.FT]: data['fts'],
+      self.model.inputs[self.model.InKey.IS_TRN]: False,
+    }
+
+
 PathCfg = birnn.PathCfg
 Reader = birnn.Reader
 ValReader = birnn.ValReader
