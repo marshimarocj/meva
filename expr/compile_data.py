@@ -43,8 +43,8 @@ def compile_data2tfrecord():
     # os.path.join(root_dir, 'compile', 'all', 'teamA.tfrecord'),
     # os.path.join(root_dir, 'compile', 'all', 'teamB.tfrecord'),
     # os.path.join(root_dir, 'compile', 'all', 'teamC.tfrecord'),
-    os.path.join(root_dir, 'compile', 'trn', '0.tfrecord'),
-    os.path.join(root_dir, 'compile', 'val', '0.tfrecord'),
+    os.path.join(root_dir, 'compile_2', 'trn', '0.tfrecord'),
+    os.path.join(root_dir, 'compile_2', 'val', '0.tfrecord'),
   ]
 
   with open(label_file) as f:
@@ -177,6 +177,6 @@ def compile_neg_data():
 
 
 if __name__ == '__main__':
-  # compile_data2tfrecord()
-  # gen_pos_lst()
-  compile_neg_data()
+  compile_data2tfrecord()
+  gen_pos_lst()
+  # compile_neg_data()

@@ -14,13 +14,13 @@ import model.vanilla
 '''expr
 '''
 def prepare_birnn():
-  # root_dir = '/home/chenj/data' # light-1
-  root_dir = '/home/jiac/ssd/meva' # gpu9
+  root_dir = '/home/chenj/data' # light-1
+  # root_dir = '/home/jiac/ssd/meva' # gpu9
   trn_data_dirs = [
-    os.path.join(root_dir, 'compile', 'trn')
+    os.path.join(root_dir, 'compile_2', 'trn')
   ]
-  val_data_dir = os.path.join(root_dir, 'compile', 'val')
-  expr_dir = os.path.join(root_dir, 'expr')
+  val_data_dir = os.path.join(root_dir, 'compile_2', 'val')
+  expr_dir = os.path.join(root_dir, 'expr', 'reproduce')
   ft_name = 'of'
 
   params = {
@@ -41,7 +41,7 @@ def prepare_birnn():
   )
   model_cfg_file = '%s.model.json'%outprefix
   cfg = model.birnn.gen_cfg(**params)
-  cfg.num_epoch = 100
+  cfg.num_epoch = 10000
   cfg.save(model_cfg_file)
 
   path_cfg = {
@@ -64,7 +64,7 @@ def prepare_vanilla():
     os.path.join(root_dir, 'compile', 'trn')
   ]
   val_data_dir = os.path.join(root_dir, 'compile', 'val')
-  expr_dir = os.path.join(root_dir, 'expr', 'vanilla')
+  expr_dir = os.path.join(root_dir, 'expr', 'reproduce')
   ft_name = 'of'
 
   params = {
@@ -80,7 +80,7 @@ def prepare_vanilla():
   )
   model_cfg_file = '%s.model.json'%outprefix
   cfg = model.vanilla.gen_cfg(**params)
-  cfg.num_epoch = 100
+  cfg.num_epoch = 10000
   cfg.save(model_cfg_file)
 
   path_cfg = {
@@ -98,5 +98,5 @@ def prepare_vanilla():
 
 
 if __name__ == '__main__':
-  # prepare_birnn()
-  prepare_vanilla()
+  prepare_birnn()
+  # prepare_vanilla()
