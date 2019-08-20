@@ -96,6 +96,7 @@ def gen_proposal_label_one_video():
           continue
 
         siou = calc_spatial_iou(emeta, gt_emeta, f-STRIDE/2, f+STRIDE/2)
+        print f, siou
         if siou >= SPATIAL_DELTA:
           lid = label2lid[gt_emeta.event]
           label[lid] = 1.
