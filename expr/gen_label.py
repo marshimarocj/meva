@@ -1,7 +1,11 @@
 import os
 import json
+import cPickle
+
+import numpy as np
 
 from diva_common.structure.annotation import *
+from diva_common.util.tracklet import *
 
 
 '''func
@@ -18,6 +22,33 @@ def load_actvid_from_json(file):
   return actv
 
 
+def calc_spatial_iou(emeta, gt_emeta, start, end):
+  int_fr_set = set(range(start, end)) & set(range(gt_emeta.event_begin, gt_emeta.event_end))
+
+  if len(int_fr_set)==0:
+    return 0
+
+  s_iou_list=[]
+  for fr in int_fr_set:
+    if fr not in emeta.frame2bbx or fr not in gt_emeta.frame2bbx:
+      continue
+    ch_bbx=list(emeta.frame2bbx[fr])
+    gt_bbx=list(gt_emeta.frame2bbx[fr])
+
+    try:
+      s_iou = bbx_int_area(ch_bbx, gt_bbx) / float(bbx_union_area(ch_bbx,gt_bbx))
+    except:
+      s_iou = 0
+
+    #   calc s_iou for bbx
+    s_iou_list.append(s_iou)
+
+  if len(s_iou_list)==0:
+    return 0
+
+  return np.mean(s_iou_list)
+
+
 '''expr
 '''
 def tst_load_actvid_from_json():
@@ -27,11 +58,12 @@ def tst_load_actvid_from_json():
   actv = load_actvid_from_json(file)
 
 
-def gen_proposal_label():
+def gen_proposal_label_one_video():
   root_dir = '/mnt/sda/jiac'
   video = '2018-03-07_17-20-00_17-25-00_school_G330'
   gt_label_file = os.path.join(root_dir, 'f330_train_annotation', 'teamB', video + '.json')
   prop_file = os.path.join(root_dir, 'f330_train_fb_feat', 'trn', 'indoor', video + '.avi', 'annotation', video, 'actv_id_type.pkl')
+  label_file = os.path.join('/home/chenj/data', 'meva_train', 'label.json')
   out_file = os.path.join('/home/chenj/data/label', video + '.pkl')
 
   STRIDE = 8 # frames
@@ -39,6 +71,10 @@ def gen_proposal_label():
   gt_actv = load_actvid_from_json(gt_label_file)
   actv = ActvIdType()
   actv.load(prop_file)
+
+  with open(label_file) as f:
+    label2lid = json.load(f)
+  num_label = len(label2lid)
 
   eid2label = {}
   for eid in actv.eid2event_meta:
