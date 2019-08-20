@@ -38,8 +38,9 @@ def calc_spatial_iou(emeta, gt_emeta, start, end):
     gt_bbx=list(gt_emeta.frame2bbx[fr])
 
     try:
-      s_iou = bbx_int_area(ch_bbx, gt_bbx, 'xywh') / float(bbx_union_area(ch_bbx,gt_bbx, 'xywh'))
-    except:
+      s_iou = bbx_int_area(ch_bbx, gt_bbx) / float(bbx_union_area(ch_bbx,gt_bbx))
+    except e:
+      print e
       s_iou = 0
 
     #   calc s_iou for bbx
