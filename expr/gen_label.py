@@ -26,6 +26,7 @@ def load_actvid_from_json(file):
 
 def calc_spatial_iou(emeta, gt_emeta, start, end):
   int_fr_set = set(range(start, end)) & set(range(gt_emeta.event_begin, gt_emeta.event_end))
+  print int_fr_set
 
   if len(int_fr_set)==0:
     return 0
