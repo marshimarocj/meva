@@ -64,15 +64,14 @@ def gen_proposal_label_one_video():
   root_dir = '/mnt/sda/jiac'
   video = '2018-03-07_17-20-00_17-25-00_school_G330'
   gt_label_file = os.path.join(root_dir, 'f330_train_annotation', 'teamB', video + '.json')
-  prop_file = os.path.join(root_dir, 'f330_train_fb_feat', 'trn', 'indoor', video + '.avi', 'annotation', video, 'actv_id_type.pkl')
+  prop_file = os.path.join(root_dir, 'f330_train_fb_feat', 'trn', 'indoor', video + '.avi', 'annotation', video, 'actv_id_type.json')
   label_file = os.path.join('/home/chenj/data', 'meva_train', 'label.json')
   out_file = os.path.join('/home/chenj/data/label', video + '.pkl')
 
   STRIDE = 8 # frames
 
   gt_actv = load_actvid_from_json(gt_label_file)
-  actv = ActvIdType()
-  actv.load(prop_file)
+  actv = load_actvid_from_json(prop_file)
 
   with open(label_file) as f:
     label2lid = json.load(f)
