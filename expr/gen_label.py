@@ -73,6 +73,8 @@ def gen_proposal_label(label2lid, gt_label_file, prop_file, out_file):
       label = np.zeros((num_label,))
       for gt_eid in gt_actv.eid2event_meta:
         gt_emeta = gt_actv.eid2event_meta[gt_eid]
+        if gt_emeta.event not in label2lid:
+          continue
         if f >= gt_emeta.event_end or f < gt_emeta.event_begin:
           continue
 
