@@ -195,12 +195,15 @@ def bat_gen_proposal_label():
 
   for video in videos:
     gt_label_file = os.path.join(gt_label_dir, video + '.json')
+    print gt_label_file
     if not os.path.exists(gt_label_file):
       continue
 
     prop_file = os.path.join(prop_dir, 'indoor', video + '.avi', 'annotation', 'actv_id_type.json')
+    print prop_file
     if not os.path.exists(prop_file):
       prop_file = os.path.join(prop_dir, 'outdoor', video + '.avi', 'annotation', 'actv_id_type.json')
+      print prop_file
       if not os.path.exists(prop_file):
         continue
 
