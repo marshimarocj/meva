@@ -28,4 +28,4 @@ def tst_load_actvid_from_json():
 
 
 if __name__ == '__main__':
-  check_videos()
+  tst_load_actvid_from_json()
