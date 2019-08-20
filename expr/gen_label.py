@@ -121,8 +121,10 @@ def gen_proposal_label_one_video():
 
 def gen_split_video_lst():
   root_dir = '/home/chenj/data'
-  lst_file = os.path.join(root_dir, 'lst', 'aws.trn.lst')
-  out_file = os.path.join(root_dir, 'lst', 'trn.lst')
+  # lst_file = os.path.join(root_dir, 'lst', 'aws.trn.lst')
+  # out_file = os.path.join(root_dir, 'lst', 'trn.lst')
+  lst_file = os.path.join(root_dir, 'lst', 'aws.val.lst')
+  out_file = os.path.join(root_dir, 'lst', 'val.lst')
 
   with open(lst_file) as f, open(out_file, 'w') as fout:
     for line in f:
