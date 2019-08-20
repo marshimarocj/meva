@@ -26,7 +26,7 @@ def load_actvid_from_json(file):
 
 def calc_spatial_iou(emeta, gt_emeta, start, end):
   int_fr_set = set(range(start, end)) & set(range(gt_emeta.event_begin, gt_emeta.event_end))
-  print int_fr_set
+  # print int_fr_set
 
   if len(int_fr_set)==0:
     return 0
@@ -42,7 +42,7 @@ def calc_spatial_iou(emeta, gt_emeta, start, end):
       s_iou = bbx_int_area(ch_bbx, gt_bbx) / float(bbx_union_area(ch_bbx,gt_bbx))
     except e:
       s_iou = 0
-    print ch_bbx, gt_bbx
+    # print ch_bbx, gt_bbx
 
     #   calc s_iou for bbx
     s_iou_list.append(s_iou)
