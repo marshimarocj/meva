@@ -72,6 +72,7 @@ def gen_proposal_label_one_video():
 
   gt_actv = load_actvid_from_json(gt_label_file)
   actv = load_actvid_from_json(prop_file)
+  print len(gt_actv.eid2event_meta), len(actv)
 
   with open(label_file) as f:
     label2lid = json.load(f)
