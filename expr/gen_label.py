@@ -8,6 +8,8 @@ from diva_common.structure.annotation import *
 from diva_common.util.tracklet import *
 
 
+SPATIAL_DELTA = 0.5
+
 '''func
 '''
 def load_actvid_from_json(file):
