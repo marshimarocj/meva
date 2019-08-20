@@ -73,7 +73,9 @@ def check_videos():
         break
     if not found:
       missing.append(video)
-  print missing
+  print len(missing)
+  for video in missing:
+    print video
 
 
 def gen_proposal_label():
