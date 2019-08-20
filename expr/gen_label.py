@@ -1,7 +1,7 @@
 import os
 import json
 
-import diva_common.structure
+from diva_common.structure.annotation import *
 
 
 '''func
@@ -9,7 +9,7 @@ import diva_common.structure
 def load_actvid_from_json(file):
   with open(file) as f:
     data = json.load(f)
-  actv = diva_common.structure.ActvIdType()
+  actv = ActvIdType()
   for eid in data:
     meta = EventMeta()
     meta.eid = int(eid)
