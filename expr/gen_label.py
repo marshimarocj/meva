@@ -119,6 +119,20 @@ def gen_proposal_label_one_video():
     cPickle.dump(eid2label, fout)
 
 
+def gen_split_video_lst():
+  root_dir = '/home/chenj/data'
+  lst_file = os.path.join(root_dir, 'lst', 'aws.trn.lst')
+  out_file = os.path.join(root_dir, 'lst', 'trn.lst')
+
+  with open(lst_file) as f, open(out_file, 'w') as fout:
+    for line in f:
+      line = line.strip()
+      start = line.rfind('/')+1
+      end = -11
+      fout.write(line[start:end] + '\n')
+
+
 if __name__ == '__main__':
   # tst_load_actvid_from_json()
-  gen_proposal_label_one_video()
+  # gen_proposal_label_one_video()
+  gen_split_video_lst()
