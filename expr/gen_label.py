@@ -53,6 +53,47 @@ def calc_spatial_iou(emeta, gt_emeta, start, end):
   return np.mean(s_iou_list)
 
 
+def gen_proposal_label(label2lid, gt_label_file, prop_file, out_file):
+  STRIDE = 8 # frames
+
+  gt_actv = load_actvid_from_json(gt_label_file)
+  actv = load_actvid_from_json(prop_file)
+
+  eid2label = {}
+  for eid in actv.eid2event_meta:
+    emeta = actv.eid2event_meta[eid]
+    start_frame = emeta.start_frame
+    end_frame = emeta.end_frame
+
+    labels = []
+    label_masks = []
+    gt_eids = set()
+    for f in range(start_frame + STRIDE/2, end_frame, STRIDE):
+      label = np.zeros((num_label,))
+      for gt_eid in gt_actv.eid2event_meta:
+        gt_emeta = gt_actv.eid2event_meta[gt_eid]
+        if f >= gt_emeta.event_end or f < gt_emeta.event_begin:
+          continue
+
+        siou = calc_spatial_iou(emeta, gt_emeta, f-STRIDE/2, f+STRIDE/2)
+        if siou >= SPATIAL_DELTA:
+          lid = label2lid[gt_emeta.event]
+          label[lid] = 1.
+          gt_eids.add(gt_eid)
+      labels.append(label)
+    gt_eids = list(gt_eids)
+
+    labels = np.array(labels, dtype=np.float32)
+    label_masks = np.array(label_masks, dtype=np.float32)
+    eid2label[eid] = {
+      'labels': labels,
+      'gt_eids': gt_eids,
+    }
+
+  with open(out_file, 'w') as fout:
+    cPickle.dump(eid2label, fout)
+
+
 '''expr
 '''
 def tst_load_actvid_from_json():
@@ -134,7 +175,44 @@ def gen_split_video_lst():
       fout.write(line[start:end] + '\n')
 
 
+def bat_gen_proposal_label():
+  root_dir = '/mnt/sda/jiac'
+  lst_file = os.path.join(root_dir, 'lst', 'trn.lst')
+  label_file = os.path.join('/home/chenj/data', 'meva_train', 'label.json')
+
+  gt_label_dir = os.path.join(root_dir, 'f330_train_annotation', 'teamB')
+  prop_dir = os.path.join(root_dir, 'f330_train_fb_feat', 'trn')
+
+  with open(label_file) as f:
+    label2lid = json.load(f)
+  num_label = len(label2lid)
+
+  videos = []
+  with open(lst_file) as f:
+    for line in f:
+      video = line.strip()
+      videos.append(video)
+
+  for video in videos:
+    gt_label_file = os.path.join(gt_label_dir, video + '.json')
+    if not os.path.exists(gt_label_file):
+      continue
+
+    prop_file = os.path.join(prop_dir, 'indoor', video + '.avi', 'annotation', 'actv_id_type.json')
+    if not os.path.exists(prop_file):
+      prop_file = os.path.join(prop_dir, 'outdoor', video + '.avi', 'annotation', 'actv_id_type.json')
+      if not os.path.exists(prop_file):
+        continue
+
+    out_file = os.path.join('/home/chenj/data/label', video + '.pkl')
+
+    print video
+
+    gen_proposal_label(label2lid, gt_label_file, prop_file, out_file)
+
+
 if __name__ == '__main__':
   # tst_load_actvid_from_json()
   # gen_proposal_label_one_video()
-  gen_split_video_lst()
+  # gen_split_video_lst()
+  bat_gen_proposal_label()
