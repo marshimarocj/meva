@@ -46,9 +46,9 @@ def bbx_union_area(p_bbx, v_bbx, format='x1y1x2y2'):
 def check_videos():
   root_dir = '/home/chenj/data/meva_train'
   video_lst_files = [
-    os.path.join(root_dir, 'gt_proposals', 'teamA.lst')
-    os.path.join(root_dir, 'gt_proposals', 'teamB.lst')
-    os.path.join(root_dir, 'gt_proposals', 'teamC.lst')
+    os.path.join(root_dir, 'gt_proposals', 'teamA.lst'),
+    os.path.join(root_dir, 'gt_proposals', 'teamB.lst'),
+    os.path.join(root_dir, 'gt_proposals', 'teamC.lst'),
   ]
   gen_proposal_dirs = [
     os.path.join(root_dir, 'meva_aug_ind330trn90_feat'),
