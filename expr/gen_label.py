@@ -118,4 +118,4 @@ def gen_proposal_label_one_video():
 
 if __name__ == '__main__':
   # tst_load_actvid_from_json()
-  gen_proposal_label()
+  gen_proposal_label_one_video()
