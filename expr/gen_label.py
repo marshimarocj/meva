@@ -62,6 +62,7 @@ def check_videos():
         line = line.strip()
         name, _ = os.path.splitext(line)
         videos.add(name)
+  print len(videos)
 
   missing = []
   for video in videos:
@@ -78,9 +79,20 @@ def check_videos():
     print video
 
 
+def gen_train_lst():
+  root_dir = '/home/chenj/data/meva_train'
+  video_lst_files = [
+  ]
+
+
+def compile_gt_label():
+  root_dir = '/home/chenj/data/meva_train'
+  lst_file = os.path.join(root_dir, )
+
+
 def gen_proposal_label():
   root_dir = '/home/chenj/data/meva_train'
-  video_lst = os.path.join(root_dir, 'gt_proposals', 'teamB.lst')
+  video_lsts = os.path.join(root_dir, 'gt_proposals', 'teamB.lst'),
   gt_proposal_dir = os.path.join(root_dir, 'gt_proposals', 'teamB')
   gen_proposal_dir = os.path.join(root_dir, 'meva_aug_ind330trn90_feat')
 
