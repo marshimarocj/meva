@@ -55,6 +55,7 @@ def calc_spatial_iou(emeta, gt_emeta, start, end):
 
 def gen_proposal_label(label2lid, gt_label_file, prop_file, out_file):
   STRIDE = 8 # frames
+  num_label = len(label2lid)
 
   gt_actv = load_actvid_from_json(gt_label_file)
   actv = load_actvid_from_json(prop_file)
