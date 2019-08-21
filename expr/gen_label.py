@@ -180,11 +180,13 @@ def gen_split_video_lst():
 
 def bat_gen_proposal_label():
   root_dir = '/mnt/sda/jiac'
-  lst_file = os.path.join('/home/chenj/data', 'lst', 'trn.lst')
+  # lst_file = os.path.join('/home/chenj/data', 'lst', 'trn.lst')
+  lst_file = os.path.join('/home/chenj/data', 'lst', 'val.lst')
   label_file = os.path.join('/home/chenj/data', 'meva_train', 'label.json')
 
   gt_label_dir = os.path.join(root_dir, 'f330_train_annotation', 'teamB')
-  prop_dir = os.path.join(root_dir, 'f330_train_fb_feat', 'trn')
+  # prop_dir = os.path.join(root_dir, 'f330_train_fb_feat', 'trn')
+  prop_dir = os.path.join(root_dir, 'f330_train_fb_feat', 'val')
 
   with open(label_file) as f:
     label2lid = json.load(f)
