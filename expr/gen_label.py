@@ -242,8 +242,12 @@ def gt_prop_label_stat():
       continue
     with open(label_file) as f:
       eid2labels = cPickle.load(f)
+    cnt = 0
+    for eid in eid2labels:
+      if len(eid2labels['gt_eids']) > 0:
+        cnt += 1
 
-    print video, len(gt_actv.eid2event_meta), len(eid2labels)
+    print video, len(gt_actv.eid2event_meta), cnt, len(eid2labels)
 
 
 if __name__ == '__main__':
