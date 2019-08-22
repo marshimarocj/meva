@@ -274,24 +274,23 @@ def check_file_stat():
   label_cnt = 0
   ft_cnt = 0
   for video in videos:
-
-    gt_actv = load_actvid_from_json(gt_label_file)
     label_file = os.path.join(label_dir, video + '.pkl')
     if not os.path.exists(label_file):
       continue
     with open(label_file) as f:
       eid2labels = cPickle.load(f)
-    cnt = 0
-    for eid in eid2labels:
-      # if len(eid2labels[eid]['gt_eids']) > 0:
-        # cnt += 1
-      if np.sum(eid2labels[eid]['labels']) > 0:
-        cnt += 1
+    eids = eid2labels.keys()
+    for eid in eids:
+      ft_file = os.path.join(ft_root_dir, 'indoor', video + '.avi', 'i3d_flow_out', '%s_%d.npz'%(video, eid))
+      if not os.path.exists(ft_file):
+        ft_file = os.path.join(ft_root_dir, 'outdoor', video + '.avi', 'i3d_flow_out', '%s_%d.npz'%(video, eid))
+        if not os.path.exists(ft_file):
+          continue
+      cnt += 1
+    ft_cnt += cnt
+    label_cnt += len(eids)
 
-    print video, len(gt_actv.eid2event_meta), cnt, len(eid2labels)
-    total_gt += len(gt_actv.eid2event_meta)
-    total_intersect += cnt
-  print total_gt, total_intersect
+  print label_cnt, ft_cnt
 
 
 if __name__ == '__main__':
@@ -299,4 +298,5 @@ if __name__ == '__main__':
   # gen_proposal_label_one_video()
   # gen_split_video_lst()
   # bat_gen_proposal_label()
-  gt_prop_label_stat()
+  # gt_prop_label_stat()
+  check_file_stat()
