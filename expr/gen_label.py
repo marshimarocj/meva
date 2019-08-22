@@ -246,7 +246,9 @@ def gt_prop_label_stat():
       eid2labels = cPickle.load(f)
     cnt = 0
     for eid in eid2labels:
-      if len(eid2labels[eid]['gt_eids']) > 0:
+      # if len(eid2labels[eid]['gt_eids']) > 0:
+        # cnt += 1
+      if np.sum(eid2labels[eid]['labels']) > 0:
         cnt += 1
 
     print video, len(gt_actv.eid2event_meta), cnt, len(eid2labels)
