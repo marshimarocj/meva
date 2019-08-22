@@ -281,9 +281,9 @@ def check_file_stat():
       eid2labels = cPickle.load(f)
     eids = eid2labels.keys()
     for eid in eids:
-      ft_file = os.path.join(ft_root_dir, 'indoor', video + '.avi', 'i3d_flow_out', '%s_%d.npz'%(video, eid))
+      ft_file = os.path.join(ft_root_dir, 'indoor', video + '.avi', 'i3d_flow_out', '%s_%s.npz'%(video, eid))
       if not os.path.exists(ft_file):
-        ft_file = os.path.join(ft_root_dir, 'outdoor', video + '.avi', 'i3d_flow_out', '%s_%d.npz'%(video, eid))
+        ft_file = os.path.join(ft_root_dir, 'outdoor', video + '.avi', 'i3d_flow_out', '%s_%s.npz'%(video, eid))
         if not os.path.exists(ft_file):
           continue
       cnt += 1
