@@ -231,6 +231,8 @@ def gt_prop_label_stat():
       video = line.strip()
       videos.append(video)
 
+  total_gt = 0
+  total_intersect = 0
   for video in videos:
     gt_label_file = os.path.join(gt_label_dir, video + '.json')
     if not os.path.exists(gt_label_file):
@@ -244,10 +246,13 @@ def gt_prop_label_stat():
       eid2labels = cPickle.load(f)
     cnt = 0
     for eid in eid2labels:
-      if len(eid2labels['gt_eids']) > 0:
+      if len(eid2labels[eid]['gt_eids']) > 0:
         cnt += 1
 
     print video, len(gt_actv.eid2event_meta), cnt, len(eid2labels)
+    total_gt += len(gt_actv.eid2event_meta)
+    total_intersect += cnt
+  print total_gt, total_intersect
 
 
 if __name__ == '__main__':
