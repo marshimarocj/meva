@@ -376,6 +376,7 @@ class Reader(framework.model.data.Reader):
           self.masks.append(label_mask)
 
     self.total = len(self.fts)
+    print('!!!!!!!!!!!!!!!!!!!!!!', self.total)
     self.idxs = range(self.total)
 
   def reset(self):

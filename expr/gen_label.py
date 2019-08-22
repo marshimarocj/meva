@@ -210,7 +210,7 @@ def bat_gen_proposal_label():
       prop_file = os.path.join(prop_dir, 'outdoor', video + '.avi', 'annotation', video, 'actv_id_type.json')
       # print prop_file
       if not os.path.exists(prop_file):
-        continue
+        raise Error('File name %s doesn\'t exist'.format(prop_file))
 
     out_file = os.path.join('/home/chenj/data/label', video + '.pkl')
 

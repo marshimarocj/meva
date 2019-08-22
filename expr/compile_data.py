@@ -115,10 +115,14 @@ def compile_data2tfrecord():
 
 def compile_neg_data():
   root_dir = '/home/chenj/data'
-  lst_file = os.path.join(root_dir, 'meva_train', 'gt_proposals', 'valid.lst')
+  # lst_file = os.path.join(root_dir, 'meva_train', 'gt_proposals', 'valid.lst')
+  # pos_lst_file = os.path.join(root_dir, 'meva_train', 'gt_proposals', 'video2pos_eids.json')
+  # ft_root_dir = os.path.join(root_dir, 'meva_train', 'gt_proposals', 'features')
+  # out_dir = os.path.join(root_dir, 'compile', 'val_neg')
+  lst_file = os.path.join(root_dir, 'lst', 'trn.lst')
   pos_lst_file = os.path.join(root_dir, 'meva_train', 'gt_proposals', 'video2pos_eids.json')
-  ft_root_dir = os.path.join(root_dir, 'meva_train', 'gt_proposals', 'features')
-  out_dir = os.path.join(root_dir, 'compile', 'val_neg')
+  ft_root_dir = os.path.join('/mnt/sda/jiac', 'f330_train_fb_feat', 'trn')
+  out_dir = os.path.join(root_dir, 'compile', 'trn')
 
   num_label = 35
 
@@ -137,21 +141,29 @@ def compile_neg_data():
 
   for video in videos:
     print video
-    pos_eids = video2pos_eids[video]
+    # pos_eids = video2pos_eids[video]
 
-    ft_dir = os.path.join(ft_root_dir, video + '.avi')
+    if os.path.exists(os.path.join(ft_root_dir, 'indoor', video + '.avi')):
+      ft_dir = os.path.join(ft_root_dir, 'indoor', video + '.avi', 'i3d_flow_out')
+    elif os.path.exists(os.path.join(ft_root_dir, 'outdoor', video + '.avi')):
+      ft_dir = os.path.join(ft_root_dir, 'outdoor', video + '.avi', 'i3d_flow_out')
+    else:
+      assert 'Video name not exists'
     names = os.listdir(ft_dir)
     records = []
     for name in names:
       start = name.rfind('_')
       end = name.rfind('.')
-      eid = name[start+1:end]
+      # eid = name[start+1:end]
 
-      if eid in pos_eids:
-        continue
+      # if eid in pos_eids:
+      #   continue
 
       ft_file = os.path.join(ft_dir, name)
-      ft = load_ft(ft_file)
+      try:
+        ft = load_ft(ft_file)
+      except:
+        continue
       ft = np.mean(np.mean(ft, 2), 1)
       ft = ft.astype(np.float32)
       num_ft = ft.shape[0]
@@ -165,7 +177,6 @@ def compile_neg_data():
       }))
       records.append(example)
       # print eid, ft.shape
-
     options = tf.python_io.TFRecordOptions(tf.python_io.TFRecordCompressionType.GZIP)
 
     out_file = os.path.join(out_dir, video + '.tfrecord')
@@ -177,6 +188,6 @@ def compile_neg_data():
 
 
 if __name__ == '__main__':
-  compile_data2tfrecord()
-  gen_pos_lst()
-  # compile_neg_data()
+  # compile_data2tfrecord()
+  # gen_pos_lst()
+  compile_neg_data()
