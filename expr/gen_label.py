@@ -225,7 +225,7 @@ def gt_prop_label_stat():
   gt_label_dir = os.path.join('/mnt/sda/jiac', 'f330_train_annotation', 'teamB')
   label_dir = os.path.join(root_dir, 'label')
 
-  vidoes = []
+  videos = []
   with open(lst_file) as f:
     for line in f:
       video = line.strip()
