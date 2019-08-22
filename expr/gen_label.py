@@ -241,7 +241,7 @@ def gt_prop_label_stat():
     if not os.path.exists(label_file):
       continue
     with open(label_file) as f:
-      eid2labels = cPickle.load(label_file)
+      eid2labels = cPickle.load(f)
 
     print video, len(gt_actv.eid2event_meta), len(eid2labels)
 
