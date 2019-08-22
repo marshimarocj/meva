@@ -280,6 +280,7 @@ def check_file_stat():
     with open(label_file) as f:
       eid2labels = cPickle.load(f)
     eids = eid2labels.keys()
+    cnt = 0
     for eid in eids:
       ft_file = os.path.join(ft_root_dir, 'indoor', video + '.avi', 'i3d_flow_out', '%s_%s.npz'%(video, eid))
       if not os.path.exists(ft_file):
