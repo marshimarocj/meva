@@ -219,8 +219,36 @@ def bat_gen_proposal_label():
     gen_proposal_label(label2lid, gt_label_file, prop_file, out_file)
 
 
+def gt_prop_label_stat():
+  root_dir = '/home/chenj/data'
+  lst_file = os.path.join(root_dir, 'lst', 'trn.lst')
+  gt_label_dir = os.path.join('/mnt/sda/jiac', 'f330_train_annotation', 'teamB')
+  label_dir = os.path.join(root_dir, 'label')
+
+  vidoes = []
+  with open(lst_file) as f:
+    for line in f:
+      video = line.strip()
+      videos.append(video)
+
+  for video in videos:
+    gt_label_file = os.path.join(gt_label_dir, video + '.json')
+    if not os.path.exists(gt_label_file):
+      continue
+
+    gt_actv = load_actvid_from_json(gt_label_file)
+    label_file = os.path.join(label_dir, video + '.pkl')
+    if not os.path.exists(label_file):
+      continue
+    with open(label_file) as f:
+      eid2labels = cPickle.load(label_file)
+
+    print video, len(gt_actv.eid2event_meta), len(eid2labels)
+
+
 if __name__ == '__main__':
   # tst_load_actvid_from_json()
   # gen_proposal_label_one_video()
   # gen_split_video_lst()
-  bat_gen_proposal_label()
+  # bat_gen_proposal_label()
+  gt_prop_label_stat()
