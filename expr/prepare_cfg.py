@@ -116,6 +116,7 @@ def prepare_conv_transformer():
     'num_head': 8,
     'dim_embed': 256,
     'dim_ft': 1024,
+    'norms': False,
   }
 
   outprefix = '%s/%s.%s.%d.%d.%d.%d'%(
