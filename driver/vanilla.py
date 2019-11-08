@@ -7,10 +7,8 @@ sys.path.append('../')
 
 import numpy as np
 
-import model.birnn
+import model.vanilla
 import common
-
-ENC = model.birnn.RNN
 
 def build_parser():
   parser = argparse.ArgumentParser(formatter_class=argparse.RawTextHelpFormatter)
@@ -28,7 +26,7 @@ def build_parser():
 
 
 def load_and_fill_model_cfg(model_cfg_file, path_cfg):
-  model_cfg = model.birnn.ModelConfig()
+  model_cfg = model.vanilla.ModelConfig()
   model_cfg.load(model_cfg_file)
 
   return model_cfg
@@ -38,11 +36,11 @@ if __name__ == '__main__':
   parser = build_parser()
   opts = parser.parse_args()
 
-  path_cfg = model.birnn.PathCfg()
+  path_cfg = model.vanilla.PathCfg()
   common.gen_dir_struct_info(path_cfg, opts.path_cfg_file)
   model_cfg = load_and_fill_model_cfg(opts.model_cfg_file, path_cfg)
 
-  m = model.birnn.Model(model_cfg)
+  m = model.vanilla.Model(model_cfg)
 
   if opts.is_train:
     with open(os.path.join(path_cfg.log_dir, 'cfg.pkl'), 'w') as fout:
@@ -50,23 +48,13 @@ if __name__ == '__main__':
       cPickle.dump(path_cfg, fout)
       cPickle.dump(opts, fout)
 
-    trntst = model.birnn.TrnTst(model_cfg, path_cfg, m)
+    trntst = model.vanilla.TrnTst(model_cfg, path_cfg, m)
 
-    trn_reader = model.birnn.Reader(
-      path_cfg.label2lid_file, path_cfg.trn_dirs, model_cfg.subcfgs[ENC].num_step, model_cfg.shift, shuffle=True)
-    val_reader = model.birnn.ValReader(
-      path_cfg.label2lid_file, [path_cfg.val_dir], model_cfg.subcfgs[ENC].num_step)
+    trn_reader = model.vanilla.Reader(
+      path_cfg.label2lid_file, path_cfg.trn_dirs, model_cfg.num_step, model_cfg.num_step, shuffle=True)
+    val_reader = model.vanilla.ValReader(
+      path_cfg.label2lid_file, [path_cfg.val_dir], model_cfg.num_step)
     if path_cfg.model_file != '':
       trntst.train(trn_reader, val_reader, memory_fraction=opts.memory_fraction, resume=True)
     else:
       trntst.train(trn_reader, val_reader, memory_fraction=opts.memory_fraction)
-  else:
-    path_cfg.model_file = os.path.join(path_cfg.model_dir, 'epoch-%d'%opts.best_epoch)
-    path_cfg.log_file = None
-    path_cfg.predict_file = os.path.join(path_cfg.output_dir, 'pred', '%s.npz'%opts.out_name)
-    data_dirs = [path_cfg.val_dir] if opts.data_dirs == '' else opts.data_dirs.split(',')
-
-    trntst = model.birnn.TrnTst(model_cfg, path_cfg, m)
-    tst_reader = model.birnn.ValReader(
-      path_cfg.label2lid_file, data_dirs, model_cfg.subcfgs[ENC].num_step)
-    trntst.test(tst_reader, memory_fraction=opts.memory_fraction)

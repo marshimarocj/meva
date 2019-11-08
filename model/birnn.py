@@ -313,11 +313,9 @@ class TrnTst(framework.model.trntst.TrnTst):
 
     all_predicts = []
     all_labels = []
-    all_props = []
     for data in tst_reader.yield_tst_batch(tst_batch_size):
       label_masks = data['label_masks']
       labels = data['labels']
-      props = data['props_names']
       feed_dict = self._construct_feed_dict_in_tst(data)
       predicts = sess.run(op_dict[self.model.OutKey.PREDICT], feed_dict=feed_dict)
       j = 0
@@ -328,12 +326,11 @@ class TrnTst(framework.model.trntst.TrnTst):
             continue
           all_predicts.append(predict[i])
           all_labels.append(label[i])
-          all_props.append(props[j])
         j += 1
     all_predicts = np.array(all_predicts)
     all_labels = np.array(all_labels)
 
-    np.savez_compressed(predict_file, predicts=all_predicts, labels=all_labels, props=all_props)
+    np.savez_compressed(predict_file, predicts=all_predicts, labels=all_labels)
 
 
 class PathCfg(framework.model.trntst.PathCfg):
@@ -379,6 +376,7 @@ class Reader(framework.model.data.Reader):
           self.masks.append(label_mask)
 
     self.total = len(self.fts)
+    print('!!!!!!!!!!!!!!!!!!!!!!', self.total)
     self.idxs = range(self.total)
 
   def reset(self):
