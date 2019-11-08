@@ -102,9 +102,9 @@ def prepare_vanilla():
 def prepare_conv_transformer():
   root_dir = '/data/jiac/meva' # diva
   trn_data_dirs = [
-    os.path.join(root_dir, 'compile', 'trn'),
+    os.path.join(root_dir, 'compile_2', 'trn'),
   ]
-  val_data_dir = os.path.join(root_dir, 'compile', 'val')
+  val_data_dir = os.path.join(root_dir, 'compile_2', 'val')
   expr_dir = os.path.join(root_dir, 'expr', 'conv_transformer')
   ft_name = 'of'
 
