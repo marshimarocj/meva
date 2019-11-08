@@ -111,12 +111,14 @@ def prepare_conv_transformer():
     'num_pos_class': 35,
     'dim_hiddens': [256],
     'num_step': 128,
-    'kernel_size': 33,
+    # 'kernel_size': 33,
+    'kernel_size': 17,
     'focal_loss': True,
     'num_head': 8,
     'dim_embed': 256,
     'dim_ft': 1024,
     'norms': False,
+    'shift': 64/2,
   }
 
   outprefix = '%s/%s.%s.%d.%d.%d.%d'%(
