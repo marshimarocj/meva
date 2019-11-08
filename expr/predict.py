@@ -28,7 +28,7 @@ def select_best_epoch(log_dir, lower=-1, upper=-1, metric='mAP'):
         max_mAP = mAP
         best_epoch = epoch
 
-  return best_epoch
+  return best_epoch, max_mAP
 
 
 def gen_script_and_run(python_file, model_cfg_file, path_cfg_file, best_epoch, gpuid, **kwargs):
@@ -111,6 +111,20 @@ def threshold():
     json.dump(out, fout, indent=2)
 
 
+def report():
+  root_dir = '/data/jiac/meva' # diva
+
+  expr_name = os.path.join(root_dir, 'expr/conv_transformer/of.256.8.1.128.17')
+
+  model_cfg_file = '%s.model.json'%expr_name
+  path_cfg_file = '%s.path.json'%expr_name
+  log_dir = os.path.join(expr_name, 'log')
+
+  best_epoch, mAP = select_best_epoch(log_dir)
+  print best_epoch, mAP
+
+
 if __name__ == '__main__':
-  predict()
+  # predict()
   # threshold()
+  report()
