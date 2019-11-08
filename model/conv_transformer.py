@@ -210,8 +210,6 @@ class Model(framework.model.module.AbstractModel):
 
 
 TrnTst = birnn.TrnTst
-Tst = birnn.Tst
 PathCfg = birnn.PathCfg
 Reader = birnn.Reader
 ValReader = birnn.ValReader
-TstReader = birnn.TstReader
