@@ -50,7 +50,7 @@ def prepare_birnn():
     'trn_dirs': trn_data_dirs,
     'val_dir': val_data_dir,
     'output_dir': outprefix,
-    'label2lid_file': os.path.join(root_dir, 'meva_train', 'label.json')
+    'label2lid_file': os.path.join(root_dir, 'label.json')
   }
   path_cfg_file = '%s.path.json'%outprefix
   with open(path_cfg_file, 'w') as fout:
