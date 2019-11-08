@@ -14,7 +14,6 @@ import framework.model.module
 import framework.model.trntst
 import framework.model.data
 import framework.impl.encoder.pca
-from diva_common.structure.annotation import *
 import op_util
 import encoder.conv_transformer
 import data
