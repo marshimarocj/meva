@@ -118,9 +118,9 @@ def prepare_conv_transformer():
     'dim_ft': 1024,
   }
 
-  outprefix = '%s/%s.%s.%d.%d.%s.%d.%d'%(
+  outprefix = '%s/%s.%s.%d.%d.%d.%d'%(
     expr_dir, ft_name, '_'.join([str(d) for d in params['dim_hiddens']]), 
-    params['num_head'], params['focal_loss'], '-'.join(props_types), 
+    params['num_head'], params['focal_loss'], 
     params['num_step'], params['kernel_size']
   )
   model_cfg_file = '%s.model.json'%outprefix
