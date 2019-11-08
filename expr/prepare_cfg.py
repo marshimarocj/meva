@@ -17,7 +17,7 @@ import model.conv_transformer
 def prepare_birnn():
   # root_dir = '/home/chenj/data' # light-1
   # root_dir = '/home/jiac/ssd/meva' # gpu9
-  root_dir = '/home/jiac/meva'
+  root_dir = '/data/jiac/meva'
   trn_data_dirs = [
     os.path.join(root_dir, 'compile', 'trn')
   ]
