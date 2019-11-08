@@ -15,13 +15,14 @@ import model.conv_transformer
 '''expr
 '''
 def prepare_birnn():
-  root_dir = '/home/chenj/data' # light-1
+  # root_dir = '/home/chenj/data' # light-1
   # root_dir = '/home/jiac/ssd/meva' # gpu9
+  root_dir = '/home/jiac/meva'
   trn_data_dirs = [
-    os.path.join(root_dir, 'compile_2', 'trn')
+    os.path.join(root_dir, 'compile', 'trn')
   ]
-  val_data_dir = os.path.join(root_dir, 'compile_2', 'val')
-  expr_dir = os.path.join(root_dir, 'expr', 'reproduce')
+  val_data_dir = os.path.join(root_dir, 'compile', 'val')
+  expr_dir = os.path.join(root_dir, 'expr', 'birnn')
   ft_name = 'of'
 
   params = {
@@ -146,6 +147,6 @@ def prepare_conv_transformer():
 
 
 if __name__ == '__main__':
-  # prepare_birnn()
+  prepare_birnn()
   # prepare_vanilla()
-  prepare_conv_transformer()
+  # prepare_conv_transformer()
