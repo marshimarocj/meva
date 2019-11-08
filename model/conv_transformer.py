@@ -49,7 +49,7 @@ def gen_cfg(**kwargs):
   cfg.num_epoch = 100
   cfg.num_pos_class = kwargs['num_pos_class']
   cfg.dim_hiddens = kwargs['dim_hiddens']
-  cfg.shift = kwargs['num_step'] - kwargs['kernel_size']
+  cfg.shift = kwargs['shift']
   cfg.focal_loss = kwargs['focal_loss']
   cfg.val_loss = False
   cfg.norms = kwargs['norms']
