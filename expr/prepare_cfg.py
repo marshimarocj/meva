@@ -160,7 +160,7 @@ def prepare_multi_conv_transformer():
     'num_pos_class': 35,
     'dim_hiddens': [256],
     'num_step': 128,
-    'kernel_size': 17,
+    'kernel_size': 9,
     'focal_loss': True,
     'num_head': 8,
     'dim_embed': 256,
