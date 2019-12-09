@@ -167,7 +167,7 @@ def prepare_multi_conv_transformer():
     'dim_ft': 1024,
     'norms': False,
     'shift': 64/2,
-    'num_layer': 6,
+    'num_layer': 4,
   }
 
   outprefix = '%s/%s.%s.%d.%d.%d.%d.%d'%(
