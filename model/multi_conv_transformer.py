@@ -93,7 +93,9 @@ class Model(framework.model.module.AbstractModel):
       PCA: framework.impl.encoder.pca.Encoder1D(self._config.subcfgs[PCA]),
     }
     for i in range(self._config.num_layer):
-      out[ENC + '_%d'%i] = encoder.conv_transformer.Encoder(self._config.subcfgs[ENC])
+      transformer = encoder.conv_transformer.Encoder(self._config.subcfgs[ENC])
+      transformer.name_scope += '_%d'%i
+      out[ENC + '_%d'%i] = transformer
     return out
 
   def _add_input_in_mode(self, mode):
