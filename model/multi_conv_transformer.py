@@ -98,7 +98,7 @@ class Model(framework.model.module.AbstractModel):
 
   def _add_input_in_mode(self, mode):
     pca_cfg = self._config.subcfgs[PCA]
-    transformer_cfg = self._config.subcfgs[ENC + '_0']
+    transformer_cfg = self._config.subcfgs[ENC]
     with tf.variable_scope(self.name_scope):
       fts = tf.placeholder(
         tf.float32, shape=(None, transformer_cfg.num_step, pca_cfg.dim_ft), name=self.InKey.FT.value)
@@ -126,7 +126,7 @@ class Model(framework.model.module.AbstractModel):
         }
 
   def _build_parameter_graph(self):
-    transformer_cfg = self._config.subcfgs[ENC + '_0']
+    transformer_cfg = self._config.subcfgs[ENC]
     self.fc_Ws = []
     self.fc_Bs = []
     with tf.variable_scope(self.name_scope):
