@@ -112,9 +112,9 @@ def prepare_conv_transformer():
   params = {
     'num_pos_class': 35,
     'dim_hiddens': [256],
-    'num_step': 128,
+    'num_step': 64,
     # 'kernel_size': 33,
-    'kernel_size': 49,
+    'kernel_size': 9,
     'focal_loss': True,
     'num_head': 8,
     'dim_embed': 256,
@@ -197,5 +197,5 @@ def prepare_multi_conv_transformer():
 if __name__ == '__main__':
   # prepare_birnn()
   # prepare_vanilla()
-  # prepare_conv_transformer()
-  prepare_multi_conv_transformer()
+  prepare_conv_transformer()
+  # prepare_multi_conv_transformer()
