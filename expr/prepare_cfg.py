@@ -167,7 +167,7 @@ def prepare_multi_conv_transformer():
     'dim_ft': 1024,
     'norms': False,
     'shift': 64/2,
-    'num_layer': 2,
+    'num_layer': 3,
   }
 
   outprefix = '%s/%s.%s.%d.%d.%d.%d.%d'%(
@@ -197,5 +197,5 @@ def prepare_multi_conv_transformer():
 if __name__ == '__main__':
   # prepare_birnn()
   # prepare_vanilla()
-  prepare_conv_transformer()
-  # prepare_multi_conv_transformer()
+  # prepare_conv_transformer()
+  prepare_multi_conv_transformer()
