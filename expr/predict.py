@@ -114,10 +114,10 @@ def threshold():
 def report():
   root_dir = '/data/jiac/meva' # diva
 
-  expr_name = os.path.join(root_dir, 'expr/conv_transformer/of.256.8.1.64.9')
+  # expr_name = os.path.join(root_dir, 'expr/conv_transformer/of.256.8.1.64.9')
   # expr_name = os.path.join(root_dir, 'expr/birnn/of.128.1.128')
   # expr_name = os.path.join(root_dir, 'expr/multi_conv_transformer/of.256.8.1.128.17.2')
-  # expr_name = os.path.join(root_dir, 'expr/multi_conv_transformer/of.256.8.1.64.5.4')
+  expr_name = os.path.join(root_dir, 'expr/multi_conv_transformer/of.256.8.1.64.9.2')
 
   model_cfg_file = '%s.model.json'%expr_name
   path_cfg_file = '%s.path.json'%expr_name
